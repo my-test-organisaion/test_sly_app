@@ -1,0 +1,6 @@
+{
+    "version": "2.0.0",
+    "name": "Test App",
+    "description": "App for testing new release app",
+    "entrypoint": "python -m uvicorn src.main:app --host 0.0.0.0 --port 8000"
+}

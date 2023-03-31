@@ -1,0 +1,85 @@
+<link href="./sly/css/app/widgets/container/style.css" rel="stylesheet" v-if="!data.ContainerAutoIddjUDE.hide" v-loading="data.ContainerAutoIddjUDE.loading"/>
+<div class="container" style="flex-direction: column; gap: 10px" v-if="!data.ContainerAutoIddjUDE.hide" v-loading="data.ContainerAutoIddjUDE.loading">
+<div><sly-card :collapsed="state.CardAutoIdNoDfY.collapsed" :disabled="state.CardAutoIdNoDfY.disabled" :options="data.CardAutoIdNoDfY.options" :subtitle="data.CardAutoIdNoDfY.description" :title="data.CardAutoIdNoDfY.title" style="width: 100%" v-if="!data.CardAutoIdNoDfY.hide" v-loading="data.CardAutoIdNoDfY.loading">
+<div><el-input :disabled="data.arg1.disabled" :maxlength="data.arg1.maxlength" :minlength="data.arg1.minlength" :placeholder="data.arg1.placeholder" :readonly="data.arg1.readonly" :size="data.arg1.size" :type="data.arg1.type" v-if="!data.arg1.hide" v-loading="data.arg1.loading" v-model="state.arg1.value">
+</el-input></div>
+<div slot="header" v-if="data.CardAutoIdNoDfY.show_slot">
+    None
+  </div>
+</sly-card></div>
+<div><sly-card :collapsed="state.CardAutoIdntHuU.collapsed" :disabled="state.CardAutoIdntHuU.disabled" :options="data.CardAutoIdntHuU.options" :subtitle="data.CardAutoIdntHuU.description" :title="data.CardAutoIdntHuU.title" style="width: 100%" v-if="!data.CardAutoIdntHuU.hide" v-loading="data.CardAutoIdntHuU.loading">
+<div><el-input-number :controls="data.arg2.controls" :debounce="data.arg2.debounce" :disabled="data.arg2.disabled" :min="-Infinity" :precision="data.arg2.precision" :size="data.arg2.size" :step="data.arg2.step" v-if="!data.arg2.hide" v-loading="data.arg2.loading" v-model="state.arg2.value">
+</el-input-number></div>
+<div slot="header" v-if="data.CardAutoIdntHuU.show_slot">
+    None
+  </div>
+</sly-card></div>
+<div><sly-card :collapsed="state.CardAutoIdSbIXZ.collapsed" :disabled="state.CardAutoIdSbIXZ.disabled" :options="data.CardAutoIdSbIXZ.options" :subtitle="data.CardAutoIdSbIXZ.description" :title="data.CardAutoIdSbIXZ.title" style="width: 100%" v-if="!data.CardAutoIdSbIXZ.hide" v-loading="data.CardAutoIdSbIXZ.loading">
+<div><el-input-number :controls="data.arg3.controls" :debounce="data.arg3.debounce" :disabled="data.arg3.disabled" :min="-Infinity" :precision="data.arg3.precision" :size="data.arg3.size" :step="data.arg3.step" v-if="!data.arg3.hide" v-loading="data.arg3.loading" v-model="state.arg3.value">
+</el-input-number></div>
+<div slot="header" v-if="data.CardAutoIdSbIXZ.show_slot">
+    None
+  </div>
+</sly-card></div>
+<div><sly-card :collapsed="state.CardAutoIdVnzTk.collapsed" :disabled="state.CardAutoIdVnzTk.disabled" :options="data.CardAutoIdVnzTk.options" :subtitle="data.CardAutoIdVnzTk.description" :title="data.CardAutoIdVnzTk.title" style="width: 100%" v-if="!data.CardAutoIdVnzTk.hide" v-loading="data.CardAutoIdVnzTk.loading">
+<div><el-checkbox :disabled="data.arg4.disabled" v-if="!data.arg4.hide" v-loading="data.arg4.loading" v-model="state.arg4.checked">
+<div style="display: inline-block"><div v-if="(data.TextAutoIdNeGU6.text) &amp;&amp; data.TextAutoIdNeGU6.hide === false" v-loading="data.TextAutoIdNeGU6.loading">
+<i :class="data.TextAutoIdNeGU6.icon" :style="{color: data.TextAutoIdNeGU6.icon_color}" style="margin-right: 5px" v-if="data.TextAutoIdNeGU6.icon"></i>
+<span :style="{color: data.TextAutoIdNeGU6.text_color}">
+<span v-html="data.TextAutoIdNeGU6.text"></span>
+</span>
+</div></div>
+</el-checkbox></div>
+<div slot="header" v-if="data.CardAutoIdVnzTk.show_slot">
+    None
+  </div>
+</sly-card></div>
+<div><sly-card :collapsed="state.CardAutoIdErDRc.collapsed" :disabled="state.CardAutoIdErDRc.disabled" :options="data.CardAutoIdErDRc.options" :subtitle="data.CardAutoIdErDRc.description" :title="data.CardAutoIdErDRc.title" style="width: 100%" v-if="!data.CardAutoIdErDRc.hide" v-loading="data.CardAutoIdErDRc.loading">
+<div><el-select :disabled="data.arg5.disabled" :filterable="data.arg5.filterable" :multiple="data.arg5.multiple" :placeholder="data.arg5.placeholder" v-if="!data.arg5.hide" v-loading="data.arg5.loading" v-model="state.arg5.value">
+<div v-if="data.arg5.items">
+<el-option :disabled="data.arg5.disabled" :key="item.value" :label="item.label" :value="item.value" v-for="item in data.arg5.items">
+<span style="float: left" v-if="item.right_text !== null">{{ item.label }}</span>
+<span style="float: right; color: #8492a6; font-size: 13px" v-if="item.right_text !== null">{{ item.right_text }}</span>
+</el-option>
+</div>
+<div v-else="">
+<el-option-group :disabled="data.arg5.disabled" :key="group.label" :label="group.label" v-for="group in data.arg5.groups">
+<el-option :disabled="data.arg5.disabled" :key="item.value" :label="item.label" :value="item.value" v-for="item in group.options">
+<span style="float: left" v-if="item.right_text">{{ item.label }}</span>
+<span style="float: right; color: #8492a6; font-size: 13px" v-if="item.right_text">{{ item.right_text }}</span>
+</el-option>
+</el-option-group>
+</div>
+</el-select>
+<span style="margin-left:10px;" v-if="(data.arg5.with_link) &amp;&amp; data.arg5.hide === false" v-loading="data.arg5.loading">
+<a :href="state.arg5.links[state.arg5.value]" target="_blank">Learn more...</a>
+</span></div>
+<div slot="header" v-if="data.CardAutoIdErDRc.show_slot">
+    None
+  </div>
+</sly-card></div>
+<div><sly-card :collapsed="state.CardAutoIdfjnlq.collapsed" :disabled="state.CardAutoIdfjnlq.disabled" :options="data.CardAutoIdfjnlq.options" :subtitle="data.CardAutoIdfjnlq.description" :title="data.CardAutoIdfjnlq.title" style="width: 100%" v-if="!data.CardAutoIdfjnlq.hide" v-loading="data.CardAutoIdfjnlq.loading">
+<div><el-select :disabled="data.arg6.disabled" :filterable="data.arg6.filterable" :multiple="data.arg6.multiple" :placeholder="data.arg6.placeholder" v-if="!data.arg6.hide" v-loading="data.arg6.loading" v-model="state.arg6.value">
+<div v-if="data.arg6.items">
+<el-option :disabled="data.arg6.disabled" :key="item.value" :label="item.label" :value="item.value" v-for="item in data.arg6.items">
+<span style="float: left" v-if="item.right_text !== null">{{ item.label }}</span>
+<span style="float: right; color: #8492a6; font-size: 13px" v-if="item.right_text !== null">{{ item.right_text }}</span>
+</el-option>
+</div>
+<div v-else="">
+<el-option-group :disabled="data.arg6.disabled" :key="group.label" :label="group.label" v-for="group in data.arg6.groups">
+<el-option :disabled="data.arg6.disabled" :key="item.value" :label="item.label" :value="item.value" v-for="item in group.options">
+<span style="float: left" v-if="item.right_text">{{ item.label }}</span>
+<span style="float: right; color: #8492a6; font-size: 13px" v-if="item.right_text">{{ item.right_text }}</span>
+</el-option>
+</el-option-group>
+</div>
+</el-select>
+<span style="margin-left:10px;" v-if="(data.arg6.with_link) &amp;&amp; data.arg6.hide === false" v-loading="data.arg6.loading">
+<a :href="state.arg6.links[state.arg6.value]" target="_blank">Learn more...</a>
+</span></div>
+<div slot="header" v-if="data.CardAutoIdfjnlq.show_slot">
+    None
+  </div>
+</sly-card></div>
+</div>

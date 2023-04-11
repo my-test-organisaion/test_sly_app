@@ -1,3 +1,4 @@
 *.pyc
 ignored.txt
 venv
+.venv

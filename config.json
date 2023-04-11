@@ -3,13 +3,8 @@
     "name": "Test App",
     "description": "App for testing new release app",
     "entrypoint": "python -m uvicorn src.main:app --host 0.0.0.0 --port 8000",
-    "modal_template": "src/modal.html",
+    "modal_template": "src/dir1/dir2/modal.html",
     "modal_template_state": {
-        "arg1.value": "",
-        "arg2.value": 0,
-        "arg3.value": 0,
-        "arg4.checked": false,
-        "arg5.value": "choice1",
-        "arg6.value": "choice1"
+        "shapeComplexity": "greedily"
     }
 }

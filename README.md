@@ -1,3 +1,11 @@
+<p align="center">
+
+  <a href="#Overview">Overview</a> •
+  <a href="#How-To-Run">How To Run</a> •
+  <a href="#Example-Screenshots">Example Screenshots</a>
+</p>
+
+
 # Interpolation tracker (v1 app)
 
 This tracker uses linear (pointwise) interpolation between figures on various frames to track points, polygons, and rectangles.

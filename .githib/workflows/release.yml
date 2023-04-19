@@ -1,0 +1,27 @@
+name: Supervisely release
+run-name: Supervisely ${{ github.repository }} app release
+on:
+  release:
+    types: [published]
+jobs:
+  Explore-GitHub-Actions:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.7.1"]
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install supervisely
+      - name: Supervisely release using cli
+          run: |
+            supervisely release --release-version ${{ github.ref }} --release-description ${{ github.event.release.name }} -slug supervisely-ecosystem/${{ github.repository }} -y
+          env: 
+            SERVER_ADDRESS: ${{ SUPERVISELY_SERVER_ADDRESS }}
+            API_TOKEN: ${{ secrets.SUPERVISELY_API_TOKEN }}

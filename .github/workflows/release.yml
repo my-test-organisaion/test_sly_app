@@ -3,6 +3,9 @@ run-name: Supervisely ${{ github.repository }} app release
 on:
   release:
     types: [published]
+    branches:
+      - main
+      - master
 jobs:
   Supervisely-Release:
     runs-on: ubuntu-latest

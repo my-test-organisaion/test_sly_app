@@ -23,7 +23,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install supervisely
+          pip install git+https://github.com/supervisely/supervisely.git@release-from-gh-test
       - name: Supervisely release using cli
         run: |
           supervisely release --release-version "${{ github.event.release.tag_name }}" --release-description "${{ github.event.release.name }}" --slug "${{ github.repository }}" -y

@@ -21,7 +21,7 @@ jobs:
           pip install supervisely
       - name: Supervisely release using cli
         run: |
-          supervisely release --release-version ${{ github.ref }} --release-description ${{ github.event.release.name }} -slug supervisely-ecosystem/${{ github.repository }} -y
+          supervisely release --release-version "${{ github.event.release.tag_name }}" --release-description "${{ github.event.release.name }}" --slug "${{ github.repository }}" -y
         env: 
           SERVER_ADDRESS: ${{ env.SUPERVISELY_SERVER_ADDRESS }}
           API_TOKEN: ${{ secrets.SUPERVISELY_API_TOKEN }}

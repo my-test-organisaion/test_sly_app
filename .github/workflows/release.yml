@@ -23,5 +23,5 @@ jobs:
         run: |
           supervisely release --release-version ${{ github.ref }} --release-description ${{ github.event.release.name }} -slug supervisely-ecosystem/${{ github.repository }} -y
         env: 
-          SERVER_ADDRESS: ${{ SUPERVISELY_SERVER_ADDRESS }}
+          SERVER_ADDRESS: ${{ env.SUPERVISELY_SERVER_ADDRESS }}
           API_TOKEN: ${{ secrets.SUPERVISELY_API_TOKEN }}

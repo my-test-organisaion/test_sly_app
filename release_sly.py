@@ -174,8 +174,12 @@ def run_release(release_name, release_version, repo, repo_url, subapp_path, serv
         print(f"Sucessfully released {release_version} ({release_name})\n")
 
 def run(slug):
-    api_token = os.getenv("SUPERVISELY_API_TOKEN", None)
-    server_address = os.getenv("SUPERVISELY_SERVER_ADDRESS", None)
+    api_token = os.getenv("API_TOKEN", None)
+    server_address = os.getenv("SERVER_ADDRESS", None)
+
+    print("DEBUG: server_address:", server_address)
+    print("DEBUG: api_token:", api_token)
+
     repo = git.Repo()
 
     GH = Github(GITHUB_ACCESS_TOKEN)

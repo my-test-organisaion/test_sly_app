@@ -1,3 +1,4 @@
+import datetime
 import json
 import os
 import re
@@ -106,6 +107,26 @@ def sorted_releases(releases):
     key = lambda release: [int(x) for x in release.tag_name[1:].split(".")]
     return sorted(releases, key=key)
 
+
+def get_created_at(repo: git.Repo, tag_name):
+    print("searching for tag: ", tag_name, "\n")
+    if tag_name is None:
+        return None
+    for tag in repo.tags:
+        print(tag.name)
+        if tag.name == tag_name:
+            print("found")
+            if tag.tag is None:
+                print("Tag is lightweight. Taking commit date")
+                timestamp = tag.commit.committed_date
+            else:
+                timestamp = tag.tag.tagged_date
+            print("timestamp: ", datetime.datetime.utcfromtimestamp(timestamp).isoformat(), "\n")
+            return datetime.datetime.utcfromtimestamp(timestamp).isoformat()
+        print("skip")
+    return None
+
+
 def run_release(release_name, release_version, repo, repo_url, subapp_path, api_token):
     print("Release_version: ", release_version, "\n")
     print("Release_name: ", release_name, "\n")
@@ -132,6 +153,8 @@ def run_release(release_name, release_version, repo, repo_url, subapp_path, api_
     print("api_key:", api_token, "\n")
     appKey = get_appKey(repo_url, subapp_path, repo)
 
+    created_at = get_created_at(repo, release_name)
+
     "Releasing version..."
     response = release(
         server_address="https://dev.supervise.ly",
@@ -144,6 +167,7 @@ def run_release(release_name, release_version, repo, repo_url, subapp_path, api_
         release_version=release_version,
         modal_template=modal_template,
         slug=slug,
+        created_at=created_at
     )
     print(response.json())
     if response.status_code == 200:
@@ -152,7 +176,7 @@ def run_release(release_name, release_version, repo, repo_url, subapp_path, api_
 def run(slug):
     load_dotenv(os.path.expanduser("~/supervisely.env"))
 
-    api_token = os.getenv("API_TOKEN", None)
+    api_token = os.getenv("SUPERVISELY_API_TOKEN", None)
     repo = git.Repo()
 
     GH = Github(GITHUB_ACCESS_TOKEN)

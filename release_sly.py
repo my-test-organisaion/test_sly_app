@@ -195,7 +195,7 @@ def run(slug):
         repo.git.checkout(tag)
         run_release(
             release_name=tag.name,
-            release_version=tag.name[13:],
+            release_version=tag.name[12:],
             repo=repo,
             repo_url=repo_url,
             subapp_path=None,

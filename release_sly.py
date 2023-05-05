@@ -11,7 +11,7 @@ def run(slug):
 
     GH = Github(GITHUB_ACCESS_TOKEN)
     gh_repo = GH.get_repo(slug)
-    if len(gh_repo.get_releases()) > 1:
+    if gh_repo.get_releases().totalCount > 1:
         print("Not the first release, skipping sly-releases")
         return
 

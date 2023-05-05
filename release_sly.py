@@ -4,7 +4,7 @@ import git
 from supervisely.cli.release.run import run as run_release
 from github import Github
 
-GITHUB_ACCESS_TOKEN = os.getenv("GITHUB_ACCESS_TOKEN", None)
+GITHUB_ACCESS_TOKEN = os.getenv("GH_ACCESS_TOKEN", None)
 
 def run(slug):
     repo = git.Repo()

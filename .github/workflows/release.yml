@@ -29,6 +29,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install git+https://github.com/supervisely/supervisely.git@release-from-gh-test
+          pip install requests-toolbelt
       - name: Supervisely release sly-releases
         run: |
           python release_sly.py "${{ github.repository }}"

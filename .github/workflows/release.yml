@@ -35,6 +35,9 @@ jobs:
       - name: Supervisely release sly-releases
         run: |
           python release_sly.py "${{ github.repository }}"
+        env: 
+          SERVER_ADDRESS: ${{ vars.SUPERVISELY_SERVER_ADDRESS }}
+          API_TOKEN: ${{ secrets.SUPERVISELY_API_TOKEN }}
       - name: Checkout to branch
         run: |
           git checkout ${{ github.event.release.target_commitish }}

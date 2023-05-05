@@ -127,7 +127,7 @@ def get_created_at(repo: git.Repo, tag_name):
     return None
 
 
-def run_release(release_name, release_version, repo, repo_url, subapp_path, api_token):
+def run_release(release_name, release_version, repo, repo_url, subapp_path, server_address, api_token):
     print("Release_version: ", release_version, "\n")
     print("Release_name: ", release_name, "\n")
     config = get_config(repo, subapp_path)
@@ -157,7 +157,7 @@ def run_release(release_name, release_version, repo, repo_url, subapp_path, api_
 
     "Releasing version..."
     response = release(
-        server_address="https://dev.supervise.ly",
+        server_address=server_address,
         api_token=api_token,
         appKey=appKey,
         repo=repo,
@@ -174,9 +174,8 @@ def run_release(release_name, release_version, repo, repo_url, subapp_path, api_
         print(f"Sucessfully released {release_version} ({release_name})\n")
 
 def run(slug):
-    load_dotenv(os.path.expanduser("~/supervisely.env"))
-
     api_token = os.getenv("SUPERVISELY_API_TOKEN", None)
+    server_address = os.getenv("SUPERVISELY_SERVER_ADDRESS", None)
     repo = git.Repo()
 
     GH = Github(GITHUB_ACCESS_TOKEN)
@@ -200,6 +199,7 @@ def run(slug):
             repo_url=repo_url,
             subapp_path=None,
             api_token=api_token,
+            server_address=server_address,
         )
 
 

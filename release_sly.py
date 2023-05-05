@@ -6,7 +6,6 @@ from dotenv import load_dotenv
 import git
 from giturlparse import parse
 import sys
-import git
 from github import Github
 
 from supervisely.cli.release import (
@@ -184,7 +183,7 @@ def run(slug):
 
     GH = Github(GITHUB_ACCESS_TOKEN)
     gh_repo = GH.get_repo(slug)
-    repo_url = gh_repo.url
+    repo_url = f"https://github.com/{slug}"
     if gh_repo.get_releases().totalCount > 1:
         print("Not the first release, skipping sly-releases")
         return

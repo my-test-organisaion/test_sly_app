@@ -243,7 +243,13 @@ def run(repo, slug, subapps):
 
 if __name__ == "__main__":
     slug = sys.argv[1]
-    subapps = os.getenv("SUBAPP_PATHS", "").split(",")
+
+    subapps = [p.lstrip(" ").rstrip(" ") for p in os.getenv("SUBAPP_PATHS", "").split(",")]
+    for i, subapp in enumerate(subapps):
+        if subapp == "__ROOT_APP__":
+            subapps[i] = None
+    if len(subapps) == 0:
+        subapps.append(None)
     print("subapps:", subapps)
     repo = git.Repo()
     run(repo, slug, [None, *subapps])

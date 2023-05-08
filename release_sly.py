@@ -243,5 +243,6 @@ def run(repo, slug, subapps):
 
 if __name__ == "__main__":
     slug = sys.argv[1]
-    subapps = sys.argv[2:]
+    subapps = os.getenv("SUBAPP_PATHS", "").split(",")
+    print("subapps:", subapps)
     run(slug, [None, *subapps])

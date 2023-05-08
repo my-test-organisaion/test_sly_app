@@ -14,7 +14,7 @@ jobs:
         python-version: ["3.8"]
     env:
       GH_ACCESS_TOKEN: ${{ secrets.GH_ACCESS_TOKEN }}
-      SUBAPP_PATHS: "__ROOT_APP__, subapp"
+      SUBAPP_PATHS: ("__ROOT_APP__" "subapp")
     steps:
       - uses: actions/checkout@v3
         with:
@@ -44,7 +44,7 @@ jobs:
           git checkout ${{ github.event.release.target_commitish }}
       - name: Supervisely release using cli
         run: |
-          supervisely release --release-version "${{ github.event.release.tag_name }}" --release-description "${{ github.event.release.name }}" --slug "${{ github.repository }}" -y
+          bash release_all_subapps.sh
         env: 
           SERVER_ADDRESS: ${{ vars.SUPERVISELY_SERVER_ADDRESS }}
           API_TOKEN: ${{ secrets.SUPERVISELY_API_TOKEN }}

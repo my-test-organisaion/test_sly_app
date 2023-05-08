@@ -245,4 +245,5 @@ if __name__ == "__main__":
     slug = sys.argv[1]
     subapps = os.getenv("SUBAPP_PATHS", "").split(",")
     print("subapps:", subapps)
-    run(slug, [None, *subapps])
+    repo = git.Repo()
+    run(repo, slug, [None, *subapps])

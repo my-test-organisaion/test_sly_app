@@ -14,6 +14,7 @@ jobs:
         python-version: ["3.8"]
     env:
       GH_ACCESS_TOKEN: ${{ secrets.GH_ACCESS_TOKEN }}
+      SUBAPP_PATHS: ("subapp")
     steps:
       - uses: actions/checkout@v3
         with:
@@ -34,7 +35,7 @@ jobs:
           pip install PyGithub
       - name: Supervisely release sly-releases
         run: |
-          python release_sly.py "${{ github.repository }}"
+          python release_sly.py "${{ github.repository }}" "${{ SUBAPP_PATHS }}"
         env: 
           SERVER_ADDRESS: ${{ vars.SUPERVISELY_SERVER_ADDRESS }}
           API_TOKEN: ${{ secrets.SUPERVISELY_API_TOKEN }}

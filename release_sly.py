@@ -126,6 +126,13 @@ def get_created_at(repo: git.Repo, tag_name):
     return None
 
 
+def get_release_name(tag):
+    if tag.tag is None:
+        return tag.name
+    else:
+        return tag.tag.message
+
+
 def run_release(release_name, release_version, repo, repo_url, subapp_path, server_address, api_token):
     print("Release_version: ", release_version, "\n")
     print("Release_name: ", release_name, "\n")
@@ -172,12 +179,12 @@ def run_release(release_name, release_version, repo, repo_url, subapp_path, serv
     if response.status_code == 200:
         print(f"Sucessfully released {release_version} ({release_name})\n")
 
-def run(slug):
+def run(slug, subapps):
     api_token = os.getenv("API_TOKEN", None)
     server_address = os.getenv("SERVER_ADDRESS", None)
 
     print("DEBUG: server_address:", server_address)
-    print("DEBUG: api_token:", api_token)
+    print("DEBUG: api_token:", f"{api_token[:4]}****{api_token[-4:]}")
 
     repo = git.Repo()
 
@@ -188,24 +195,37 @@ def run(slug):
         print("Not the first release, skipping sly-releases")
         return
 
-    key = lambda tag: [int(x) for x in tag.name[13:].split(".")]
-    sorted_tags = sorted(
-        [tag for tag in repo.tags if tag.name.startswith("sly-release")], key=key
-    )
-
-    for tag in sorted_tags:
-        repo.git.checkout(tag)
-        run_release(
-            release_name=tag.name,
-            release_version=tag.name[12:],
-            repo=repo,
-            repo_url=repo_url,
-            subapp_path=None,
-            api_token=api_token,
-            server_address=server_address,
+    for subapp in subapps:
+        if subapp is None:
+            print("Releasing main app\n")
+        else:
+            print('Releasing subapp at: "', subapp, '"\n')
+        try:
+            open("config.json", "r")
+        except:
+            print("config.json not found, skipping sly-releases")
+            return
+        
+        key = lambda tag: [int(x) for x in tag.name[13:].split(".")]
+        sorted_tags = sorted(
+            [tag for tag in repo.tags if tag.name.startswith("sly-release-v")], key=key
         )
 
+        for tag in sorted_tags:
+            repo.git.checkout(tag)
+            release_name = get_release_name(tag)
+            run_release(
+                release_name=release_name,
+                release_version=tag.name[12:],
+                repo=repo,
+                repo_url=repo_url,
+                subapp_path=None,
+                api_token=api_token,
+                server_address=server_address,
+            )
+        
 
 if __name__ == "__main__":
     slug = sys.argv[1]
-    run(slug)
+    subapps = sys.argv[2:]
+    run(slug, [None, *subapps])

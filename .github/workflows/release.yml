@@ -48,3 +48,6 @@ jobs:
         env: 
           SERVER_ADDRESS: ${{ vars.SUPERVISELY_SERVER_ADDRESS }}
           API_TOKEN: ${{ secrets.SUPERVISELY_API_TOKEN }}
+          RELEASE_VERSION: "${{ github.event.release.tag_name }}"
+          RELEASE_DESCRIPTION: "${{ github.event.release.name }}"
+          SLUG: "${{ github.repository }}"

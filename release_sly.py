@@ -1,6 +1,7 @@
 import datetime
 import json
 import os
+from pathlib import Path
 import re
 from dotenv import load_dotenv
 import git
@@ -13,6 +14,7 @@ from supervisely.cli.release import (
 )
 
 GITHUB_ACCESS_TOKEN = os.getenv("GH_ACCESS_TOKEN", None)
+
 
 def clone_repo(repo_url):
     repo_dir = os.path.join(os.getcwd(), "repo")
@@ -108,7 +110,9 @@ def sorted_releases(releases):
 
 
 def get_created_at(repo: git.Repo, tag_name):
-    print("searching for tag: ", tag_name, "\n")
+    print()
+    print("Searching for release timestamp. Tag name", tag_name)
+    print()
     if tag_name is None:
         return None
     for tag in repo.tags:
@@ -120,7 +124,11 @@ def get_created_at(repo: git.Repo, tag_name):
                 timestamp = tag.commit.committed_date
             else:
                 timestamp = tag.tag.tagged_date
-            print("timestamp: ", datetime.datetime.utcfromtimestamp(timestamp).isoformat(), "\n")
+            print(
+                "timestamp: ",
+                datetime.datetime.utcfromtimestamp(timestamp).isoformat(),
+                "\n",
+            )
             return datetime.datetime.utcfromtimestamp(timestamp).isoformat()
         print("skip")
     return None
@@ -133,20 +141,27 @@ def get_release_name(tag):
         return tag.tag.message
 
 
-def run_release(release_name, release_version, repo, repo_url, subapp_path, server_address, api_token):
-    print("Release_version: ", release_version, "\n")
-    print("Release_name: ", release_name, "\n")
+def run_release(
+    release_name,
+    release_version,
+    repo,
+    repo_url,
+    subapp_path,
+    server_address,
+    api_token,
+    slug,
+):
+    print("Release_version: ", release_version)
+    print("Release_name: ", release_name)
     config = get_config(repo, subapp_path)
     print(
         "Config: ",
         join_path_with_subapp(repo.working_dir, subapp_path, "config.json"),
-        "\n",
     )
     readme = get_readme(repo, subapp_path)
     print(
         "Readme: ",
         join_path_with_subapp(repo.working_dir, subapp_path, "README.md"),
-        "\n",
     )
     modal_template = get_modal_template(repo, subapp_path, config)
     print(
@@ -154,12 +169,10 @@ def run_release(release_name, release_version, repo, repo_url, subapp_path, serv
         join_path_with_subapp(repo.working_dir, subapp_path, config["modal_template"])
         if modal_template
         else None,
-        "\n",
     )
-    print("api_key:", api_token, "\n")
     appKey = get_appKey(repo_url, subapp_path, repo)
 
-    created_at = get_created_at(repo, release_name)
+    created_at = get_created_at(repo, f"sly-release-{release_version}")
 
     "Releasing version..."
     response = release(
@@ -173,20 +186,20 @@ def run_release(release_name, release_version, repo, repo_url, subapp_path, serv
         release_version=release_version,
         modal_template=modal_template,
         slug=slug,
-        created_at=created_at
+        created_at=created_at,
     )
     print(response.json())
     if response.status_code == 200:
         print(f"Sucessfully released {release_version} ({release_name})\n")
 
-def run(slug, subapps):
+
+def run(repo, slug, subapps):
     api_token = os.getenv("API_TOKEN", None)
     server_address = os.getenv("SERVER_ADDRESS", None)
 
     print("DEBUG: server_address:", server_address)
     print("DEBUG: api_token:", f"{api_token[:4]}****{api_token[-4:]}")
-
-    repo = git.Repo()
+    print()
 
     GH = Github(GITHUB_ACCESS_TOKEN)
     gh_repo = GH.get_repo(slug)
@@ -200,12 +213,14 @@ def run(slug, subapps):
             print("Releasing main app\n")
         else:
             print('Releasing subapp at: "', subapp, '"\n')
-        try:
-            open("config.json", "r")
-        except:
+        if (
+            not Path(next(repo.commit().tree.traverse()).abspath)
+            .parent.joinpath("config.json")
+            .exists
+        ):
             print("config.json not found, skipping sly-releases")
             return
-        
+
         key = lambda tag: [int(x) for x in tag.name[13:].split(".")]
         sorted_tags = sorted(
             [tag for tag in repo.tags if tag.name.startswith("sly-release-v")], key=key
@@ -222,8 +237,9 @@ def run(slug, subapps):
                 subapp_path=None,
                 api_token=api_token,
                 server_address=server_address,
+                slug=slug,
             )
-        
+
 
 if __name__ == "__main__":
     slug = sys.argv[1]

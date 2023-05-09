@@ -13,7 +13,7 @@ jobs:
       SUPERVISELY_API_TOKEN: "${{ secrets.SUPERVISELY_API_TOKEN }}"
       GH_ACCESS_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
     with:
-      SERVER_ADDRESS: "${{ vars.SUPERVISELY_SERVER_ADDRESS }}"
+      SUPERVISELY_SERVER_ADDRESS: "${{ vars.SUPERVISELY_SERVER_ADDRESS }}"
       SLUG: "${{ github.repository }}"
       RELEASE_VERSION: "${{ github.event.release.tag_name }}"
       RELEASE_TITLE: "${{ github.event.release.name }}"

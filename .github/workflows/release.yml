@@ -8,7 +8,7 @@ on:
       - master
 jobs:
   Supervisely-Release:
-    uses: my-test-organisaion/workflows/.github/workflows/release.yml@main
+    uses: my-test-organisaion/workflows/.github/workflows/release.yml@master
     with:
       SERVER_ADDRESS: ${{ vars.SUPERVISELY_SERVER_ADDRESS }}
       SUPERVISELY_API_TOKEN: ${{ secrets.SUPERVISELY_API_TOKEN }}

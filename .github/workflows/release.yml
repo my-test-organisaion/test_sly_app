@@ -9,45 +9,16 @@ on:
 jobs:
   Supervisely-Release:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: ["3.8"]
     env:
-      GH_ACCESS_TOKEN: ${{ secrets.GH_ACCESS_TOKEN }}
       SUBAPP_PATHS: ("__ROOT_APP__" "subapp")
     steps:
-      - uses: actions/checkout@v3
+      - name: Release
+        uses: my-test-organisaion/workflows/.github/workflows/release.yml@main
         with:
-          fetch-depth: 0
-      - name: Checkout to branch
-        run: |
-          git checkout ${{ github.event.release.target_commitish }}
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v4
-        with:
-          python-version: ${{ matrix.python-version }}
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install git+https://github.com/supervisely/supervisely.git@release-from-gh-test
-          pip uninstall -y urllib3 requests-toolbelt
-          pip install urllib3==1.26.15 requests-toolbelt==0.10.1
-          pip install PyGithub
-      - name: Supervisely release sly-releases
-        run: |
-          python release_sly.py "${{ github.repository }}"
-        env: 
           SERVER_ADDRESS: ${{ vars.SUPERVISELY_SERVER_ADDRESS }}
-          API_TOKEN: ${{ secrets.SUPERVISELY_API_TOKEN }}
-      - name: Checkout to branch
-        run: |
-          git checkout ${{ github.event.release.target_commitish }}
-      - name: Supervisely release using cli
-        run: |
-          bash release_all_subapps.sh
-        env: 
-          SERVER_ADDRESS: ${{ vars.SUPERVISELY_SERVER_ADDRESS }}
-          API_TOKEN: ${{ secrets.SUPERVISELY_API_TOKEN }}
-          RELEASE_VERSION: "${{ github.event.release.tag_name }}"
-          RELEASE_DESCRIPTION: "${{ github.event.release.name }}"
+          SUPERVISELY_API_TOKEN: ${{ secrets.SUPERVISELY_API_TOKEN }}
+          GH_ACCESS_TOKEN: ${{ secrets.GH_ACCESS_TOKEN }}
           SLUG: "${{ github.repository }}"
+          RELEASE_VERSION: "${{ github.event.release.tag_name }}"
+          RELEASE_TITLE: "${{ github.event.release.name }}"
+          SUBAPP_PATHS: "${{ SUBAPP_PATHS }}"

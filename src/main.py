@@ -1,7 +1,7 @@
 import os
 from dotenv import load_dotenv
 import supervisely as sly
-from supervisely.app.widgets import Button, Container, Button
+from supervisely.app.widgets import Button, Container, Button, Text
 
 
 load_dotenv("local.env")
@@ -21,7 +21,7 @@ for i in range(50):
     buttons.append(b)
 
 layout = Container(
-    widgets=[stop_button, print_button, *buttons]
+    widgets=[Text("hello, I'm updated"), stop_button, print_button, *buttons]
 )
 app = sly.Application(layout=layout)
 

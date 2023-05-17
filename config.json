@@ -6,6 +6,5 @@
     "modal_template": "src/dir1/dir2/modal.html",
     "modal_template_state": {
         "shapeComplexity": "greedily"
-    },
-    "poster": "https://user-images.githubusercontent.com/115161827/232042280-efa9361c-c122-4ccd-80d6-575a63b4fcf7.png"
+    }
 }

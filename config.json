@@ -1,5 +1,5 @@
 {
-    "slug": "test-slug/test-app",
+    "slug": "test-slug/test_app",
     "release": {
         "name": "Test from old cli",
         "version": "v1.0.0"

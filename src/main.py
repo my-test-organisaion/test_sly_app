@@ -21,7 +21,7 @@ for i in range(50):
     buttons.append(b)
 
 layout = Container(
-    widgets=[Text("hello, I'm updated 2"), stop_button, print_button, *buttons]
+    widgets=[Text("hello, I'm branch 3"), stop_button, print_button, *buttons]
 )
 app = sly.Application(layout=layout)
 

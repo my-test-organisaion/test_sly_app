@@ -3,5 +3,6 @@
     "name": "Test App Subapp",
     "description": "App for testing new release app (SubApp)",
     "entrypoint": "python -m uvicorn subapp.src.main:app --host 0.0.0.0 --port 8000",
-    "modal_template": "src/dir1/dir2/modal.html"
+    "modal_template": "src/dir1/dir2/modal.html",
+    "poster": "https://user-images.githubusercontent.com/115161827/236404883-d3b880bb-d2ac-4409-aad5-b8fd53285de2.jpg"
 }

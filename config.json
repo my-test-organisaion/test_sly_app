@@ -1,9 +1,6 @@
 {
     "slug": "test-slug/test_app",
-    "release": {
-        "name": "Test from old cli",
-        "version": "v1.0.0"
-    },
+    "release": {"name": "Test from old cli", "version": "v1.0.0"},
     "version": "2.0.0",
     "name": "Test App",
     "description": "App for testing new release app",

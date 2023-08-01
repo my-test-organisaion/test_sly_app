@@ -1,0 +1,3 @@
+[submodule "tag-by-dataset-name"]
+	path = tag-by-dataset-name
+	url = https://github.com/supervisely-ecosystem/tag-by-dataset-name.git

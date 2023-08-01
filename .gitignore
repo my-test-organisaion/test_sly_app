@@ -2,3 +2,6 @@
 ignored.txt
 venv
 .venv
+supervisely
+local.env
+.vscode

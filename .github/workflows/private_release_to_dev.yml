@@ -5,8 +5,8 @@ on:
     inputs:
       release_version:
         type: string
-        description: 'Release version in format v1.0.0'
-        required: true
+        description: 'Release version in format v1.0.0. Required for master/main branch'
+        required: false
       release_descritption:
         type: string
         description: 'Release description'
@@ -16,11 +16,11 @@ jobs:
   Supervisely-Release:
     uses: my-test-organisaion/workflows/.github/workflows/common.yml@master
     secrets:
-      SUPERVISELY_API_TOKEN: "${{ secrets.SUPERVISELY_DEV_API_TOKEN }}"
+      SUPERVISELY_API_TOKEN: "${{ secrets.SUPERVISELY_PRIVATE_DEV_API_TOKEN }}"
       SUPERVISELY_PROD_API_TOKEN: "${{ secrets.SUPERVISELY_PROD_API_TOKEN }}"
       GH_ACCESS_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
     with:
-      SUPERVISELY_SERVER_ADDRESS: "${{ vars.SUPERVISELY_DEV_API_TOKEN }}"
+      SUPERVISELY_SERVER_ADDRESS: "${{ vars.SUPERVISELY_DEV_SERVER_ADDRESS }}"
       SUPERVISELY_PROD_SERVER_ADDRESS: "${{ vars.SUPERVISELY_PROD_SERVER_ADDRESS }}"
       SLUG: "${{ github.repository }}"
       RELEASE_VERSION: "${{ github.event.inputs.release_version }}"
@@ -28,5 +28,5 @@ jobs:
       IGNORE_SLY_RELEASES: 1
       RELEASE_WITH_SLUG: 1
       CHECK_PREV_RELEASES: 0
-      CHECK_APP_RELEASED: 1
+      CHECK_APP_RELEASED: 0
       SUBAPP_PATHS: "__ROOT_APP__, subapp"

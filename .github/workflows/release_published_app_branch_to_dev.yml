@@ -1,5 +1,5 @@
-name: Supervisely release branch to dev
-run-name: Supervisely ${{ github.event.repository.name }} app release ${{ github.ref_name }} branch to dev
+name: Release branch to dev
+run-name: Release published app branch to dev. Branch name "${{ github.ref_name }}"
 on:
   push:
     branches-ignore:
@@ -7,7 +7,7 @@ on:
       - master
 jobs:
   Supervisely-Release:
-    uses: my-test-organisaion/workflows/.github/workflows/common.yml@master
+    uses: supervisely-ecosystem/workflows/.github/workflows/common.yml@master
     secrets:
       SUPERVISELY_API_TOKEN: "${{ secrets.SUPERVISELY_DEV_API_TOKEN }}"
       SUPERVISELY_PROD_API_TOKEN: "${{ secrets.SUPERVISELY_PROD_API_TOKEN }}"
@@ -23,4 +23,3 @@ jobs:
       CHECK_PREV_RELEASES: 0
       CHECK_APP_RELEASED: 1
       SUBAPP_PATHS: "__ROOT_APP__, subapp"
-      

@@ -13,7 +13,7 @@ on:
         required: true
 jobs:
   Supervisely-Release:
-    uses: supervisely-ecosystem/workflows/.github/workflows/common.yml@master
+    uses: my-test-organisaion/workflows/.github/workflows/common.yml@master
     secrets:
       SUPERVISELY_API_TOKEN: "${{ secrets.SUPERVISELY_PROD_API_TOKEN }}"
       SUPERVISELY_PROD_API_TOKEN: "${{ secrets.SUPERVISELY_PROD_API_TOKEN }}"

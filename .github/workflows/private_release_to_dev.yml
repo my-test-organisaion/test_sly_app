@@ -5,8 +5,8 @@ on:
     inputs:
       release_version:
         type: string
-        description: 'Release version in format v1.0.0'
-        required: true
+        description: 'Release version in format v1.0.0. Required for master/main branch'
+        required: false
       release_descritption:
         type: string
         description: 'Release description'

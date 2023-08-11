@@ -33,3 +33,5 @@ Small polygons respond well to the method, but because there aren't many points,
 
 The total number of points on the start and end polygons increases until it reaches the least common multiple of those points.
 On the sides, new points are distributed uniformly. Some points can be automatically eliminated after interpolation.
+
+asda

@@ -24,6 +24,6 @@ jobs:
       SUPERVISELY_PROD_SERVER_ADDRESS: "${{ vars.SUPERVISELY_PROD_SERVER_ADDRESS }}"
       SLUG: "${{ github.repository }}"
       RELEASE_VERSION: "${{ github.event.inputs.release_version }}"
-      RELEASE_TITLE: "${{ github.event.inputs.release_descritption }}"
+      RELEASE_DESCRIPTION: "${{ github.event.inputs.release_descritption }}"
       RELEASE_TYPE: "private-branch"
       SUBAPP_PATHS: "__ROOT_APP__, subapp"

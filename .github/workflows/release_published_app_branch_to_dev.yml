@@ -17,6 +17,6 @@ jobs:
       SUPERVISELY_PROD_SERVER_ADDRESS: "${{ vars.SUPERVISELY_PROD_SERVER_ADDRESS }}"
       SLUG: "${{ github.repository }}"
       RELEASE_VERSION: "${{ github.ref_name }}"
-      RELEASE_TITLE: "'${{ github.ref_name }}' branch release"
+      RELEASE_DESCRIPTION: "'${{ github.ref_name }}' branch release"
       RELEASE_TYPE: "branch-to-dev"
       SUBAPP_PATHS: "__ROOT_APP__, subapp"

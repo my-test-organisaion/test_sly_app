@@ -25,5 +25,5 @@ jobs:
       SLUG: "${{ github.repository }}"
       RELEASE_VERSION: "${{ github.event.inputs.release_version }}"
       RELEASE_DESCRIPTION: "${{ github.event.inputs.release_descritption }}"
-      RELEASE_TYPE: "private-branch"
+      RELEASE_TYPE: "private"
       SUBAPP_PATHS: "__ROOT_APP__, subapp"

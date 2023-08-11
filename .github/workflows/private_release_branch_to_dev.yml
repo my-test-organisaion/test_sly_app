@@ -1,15 +1,11 @@
-name: Private release to dev
-run-name: Private release to dev. Version "${{ github.event.inputs.release_version }}"
+name: Private release branch to dev
+run-name: Private release "${{ github.ref_name }}" branch to dev
 on: 
   workflow_dispatch:
     inputs:
-      release_version:
-        type: string
-        description: "Release version in format v1.0.0."
-        required: false
       release_descritption:
         type: string
-        description: "Release description"
+        description: 'Release description'
         required: true
 
 jobs:
@@ -23,7 +19,7 @@ jobs:
       SUPERVISELY_SERVER_ADDRESS: "${{ vars.SUPERVISELY_DEV_SERVER_ADDRESS }}"
       SUPERVISELY_PROD_SERVER_ADDRESS: "${{ vars.SUPERVISELY_PROD_SERVER_ADDRESS }}"
       SLUG: "${{ github.repository }}"
-      RELEASE_VERSION: "${{ github.event.inputs.release_version }}"
-      RELEASE_TITLE: "${{ github.event.inputs.release_descritption }}"
-      RELEASE_TYPE: "private-branch"
+      RELEASE_VERSION: "${{ github.ref_name }}"
+      RELEASE_DESCRIPTION: "${{ github.event.inputs.release_descritption }}"
+      RELEASE_TYPE: "private"
       SUBAPP_PATHS: "__ROOT_APP__, subapp"

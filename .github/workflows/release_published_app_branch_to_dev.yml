@@ -1,5 +1,5 @@
 name: Release branch to dev
-run-name: Release published app branch to dev. Branch name "${{ github.ref_name }}"
+run-name: Release published app "${{ github.ref_name }}" branch to dev.
 on:
   push:
     branches-ignore:
@@ -18,8 +18,5 @@ jobs:
       SLUG: "${{ github.repository }}"
       RELEASE_VERSION: "${{ github.ref_name }}"
       RELEASE_TITLE: "'${{ github.ref_name }}' branch release"
-      IGNORE_SLY_RELEASES: 1
-      RELEASE_WITH_SLUG: 1
-      CHECK_PREV_RELEASES: 0
-      CHECK_APP_RELEASED: 1
+      RELEASE_TYPE: "branch-to-dev"
       SUBAPP_PATHS: "__ROOT_APP__, subapp"

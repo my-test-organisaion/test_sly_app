@@ -6,7 +6,7 @@ on:
       release_version:
         type: string
         description: "Release version in format v1.0.0."
-        required: false
+        required: true
       release_descritption:
         type: string
         description: "Release description"

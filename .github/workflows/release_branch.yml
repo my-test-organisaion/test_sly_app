@@ -19,5 +19,5 @@ jobs:
       SLUG: "${{ github.repository }}"
       RELEASE_VERSION: "${{ github.ref_name }}"
       RELEASE_DESCRIPTION: "'${{ github.ref_name }}' branch release"
-      RELEASE_TYPE: "branch"
+      RELEASE_TYPE: "release-branch"
       SUBAPP_PATHS: "__ROOT_APP__, subapp"
